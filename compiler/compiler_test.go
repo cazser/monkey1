@@ -18,14 +18,15 @@ type compilerTestCase struct{
 
 func TestIntegerArithemtic(t *testing.T){
 	tests:= []compilerTestCase{
+		{
 		input: "1+2",
 		expectedConstants: []interface{}{1, 2},
 		expectedInstrcutions: []code.Instructions{
 			code.Make(code.OpConstant, 0),
 			code.Make(code.OpConstant, 1),
 		},
-
 	},
+}
 
 	runCompilerTests(t, tests);
 }
@@ -48,7 +49,7 @@ func runCompilerTests(t *testing.T, tests []compilerTestCase){
 		if err!= nil{
 			t.Fatalf("testInstructions failed: %s", err);
 		}
-		err = testConstant(t, tt.expectedConstants, bytecode.Constants);
+		err = testConstants(t, tt.expectedConstants, bytecode.Constants);
 
 		if err!= nil{
 			t.Fatalf("testConstants failed: %s", err);
@@ -96,7 +97,7 @@ func concatInstructions(s []code.Instructions) code.Instructions{
 func testConstants(
 	t *testing.T,
 	expected []interface{},
-	actual []object.object,
+	actual []object.Object,
 )error{
 	if len(expected) != len(actual){
 		return fmt.Errorf("wrong number of constants. got=%d, want=%d",
@@ -104,7 +105,7 @@ func testConstants(
 	}
 
 	for i, constant := range expected{
-		switch  constant:= constants.(type) {
+		switch  constant:= constant.(type) {
 		case int:
 			err:= testIntegerObject(int64(constant), actual[i])
 			if err!= nil{
@@ -114,5 +115,20 @@ func testConstants(
 		}
 	}
 
+	return nil;
+}
+
+
+func testIntegerObject(expected int64, actual object.Object) error{
+	result, ok := actual.(*object.Integer);
+	if !ok{
+		return fmt.Errorf("object is not Integer. got=%T (%+v)", 
+	   actual, actual);
+	}
+
+	if result.Value != expected{
+		return fmt.Errorf("object has wrong value. got=%d, want=%d",
+	result.Value, expected)
+	}
 	return nil;
 }
