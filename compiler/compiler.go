@@ -36,3 +36,5 @@ type ByteCode struct{
 	Instructions code.Instructions
 	Constants []object.Object
 }
+
+

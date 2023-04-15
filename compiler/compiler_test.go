@@ -132,3 +132,4 @@ func testIntegerObject(expected int64, actual object.Object) error{
 	}
 	return nil;
 }
+
