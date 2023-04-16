@@ -3,6 +3,7 @@ package code
 import (
 	"fmt"
 	"encoding/binary"
+	"bytes"
 )
 type Instructions []byte
 
@@ -59,5 +60,6 @@ func Make(op Opcode, operands ...int) []byte{
 
 
 func (ins Instructions) String() string{
+	var out bytes.Buffer;
 	return ""
 }
