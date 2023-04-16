@@ -16,7 +16,7 @@ type compilerTestCase struct{
  expectedInstrcutions []code.Instructions
 }
 
-func TestIntegerArithemtic(t *testing.T){
+func TestIntegerArithemticAndBooleanExpression(t *testing.T){
 	tests:= []compilerTestCase{
 		{
 		input: "1;2",
@@ -134,9 +134,25 @@ func TestIntegerArithemtic(t *testing.T){
 			code.Make(code.OpPop),
 		},
 	},
-
-
-
+  {
+		input: "-1",
+		expectedConstants: []interface{}{1},
+		expectedInstrcutions: []code.Instructions{
+			code.Make(code.OpConstant, 0),
+			code.Make(code.OpMinus),
+			code.Make(code.OpPop),
+		},
+	},
+  {
+		input: "!true",
+		expectedConstants: []interface{}{},
+		expectedInstrcutions: []code.Instructions{
+			code.Make(code.OpTrue),
+			code.Make(code.OpBang),
+			code.Make(code.OpPop),
+		},
+	},
+ 
 
 }
 
