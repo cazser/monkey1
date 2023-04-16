@@ -58,6 +58,24 @@ func TestIntegerArithemtic(t *testing.T){
 			code.Make(code.OpPop),
 		},
 	},
+	{
+		input: "true",
+		expectedConstants: []interface{}{},
+		expectedInstrcutions: []code.Instructions{
+			code.Make(code.OpTrue),
+			code.Make(code.OpPop),
+		},
+	},
+	{
+		input: "false",
+		expectedConstants: []interface{}{},
+		expectedInstrcutions: []code.Instructions{
+			code.Make(code.OpFalse),
+			code.Make(code.OpPop),
+		},
+	},
+
+
 }
 
 	runCompilerTests(t, tests);
