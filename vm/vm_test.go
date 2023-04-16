@@ -80,7 +80,7 @@ func TestIntegerArithemtic(t *testing.T){
 	tests:= []vmTestCase{
 		{"1", 1},
 		{"2", 2},
-		{"1+ 2", 2}, //需修改
+		{"1+ 2", 3}, //需修改
 	}
 	runVmTests(t, tests)
 }
