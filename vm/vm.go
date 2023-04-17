@@ -8,6 +8,8 @@ import (
 )
 
 const StackSize = 2048
+var Null = &object.Null{};
+
 
 type VM struct{
 	constants []object.Object
