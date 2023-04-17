@@ -8,6 +8,7 @@ import (
 )
 
 const StackSize = 2048
+const GlobalSize = 65536
 var Null = &object.Null{};
 
 
@@ -17,6 +18,7 @@ type VM struct{
 
 	stack []object.Object
 	sp int 
+	globals []object.Object
 }
 var True = &object.Boolean{Value: true};
 var False = &object.Boolean{Value: false};
@@ -28,6 +30,7 @@ func New(bytecode *compiler.ByteCode) *VM{
 		constants:    bytecode.Constants,
     stack:        make([]object.Object, StackSize),
 		sp:           0,
+		globals:      make([]object.Object, GlobalSize),
 	}
 }
 
