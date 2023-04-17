@@ -317,6 +317,21 @@ func TestGlobalLetStatements(t *testing.T){
 				code.Make(code.OpSetGlobal, 1),
 			},
 		},
+    {
+			input: `
+			let one = 1;
+			one;
+			`,
+			expectedConstants: []interface{}{1},
+			expectedInstrcutions:[]code.Instructions{
+				code.Make(code.OpConstant, 0),
+				code.Make(code.OpSetGlobal, 0),
+				code.Make(code.OpGetGlobal, 0),
+				code.Make(code.OpPop),
+			},
+		},
+
+
 	}
 	
 	runCompilerTests(t, tests);
