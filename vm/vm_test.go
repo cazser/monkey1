@@ -171,10 +171,22 @@ func TestConditionals(t *testing.T){
 		{"if (1 < 2) { 10 }", 10},
 		{"if (1 < 2) { 10 } else { 20 }", 10},
 		{"if (1 > 2) { 10 } else { 20 }", 20},
-    //todo panic
+    //todo if(false){} => Null problem
 		/*{"if (1>2) {10},", Null},
 		{"if (false) { 10 }", Null},		
    */
+	}
+
+	runVmTests(t, tests);
+}
+
+
+func TestGlobalLetStatements(t *testing.T){
+	tests:= []vmTestCase{
+		{"let one = 1; one", 1},
+		{"let one = 1; let two = 2; one + two", 3},
+		{"let one = 1; let two = one + one; one + two", 3},
+				
 	}
 
 	runVmTests(t, tests);
