@@ -301,3 +301,23 @@ func TestConditionals(t *testing.T){
 
 	runCompilerTests(t, tests)
 }
+
+func TestGlobalLetStatements(t *testing.T){
+  tests:= []compilerTestCase{
+    {
+			input: `
+			let one = 1;
+			let two = 2;
+			`,
+			expectedConstants: []interface{}{1, 2},
+			expectedInstrcutions:[]code.Instructions{
+				code.Make(code.OpConstant, 0),
+				code.Make(code.OpSetGlobal, 0),
+				code.Make(code.OpConstant, 1),
+				code.Make(code.OpSetGlobal, 1),
+			},
+		},
+	}
+	
+	runCompilerTests(t, tests);
+}
