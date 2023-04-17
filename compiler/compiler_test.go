@@ -330,6 +330,22 @@ func TestGlobalLetStatements(t *testing.T){
 				code.Make(code.OpPop),
 			},
 		},
+    {
+			input: `
+			let one = 1;
+			let two = one;
+			two;
+			`,
+			expectedConstants: []interface{}{1},
+			expectedInstrcutions:[]code.Instructions{
+				code.Make(code.OpConstant, 0),
+				code.Make(code.OpSetGlobal, 0),
+				code.Make(code.OpGetGlobal, 0),
+				code.Make(code.OpSetGlobal, 1),
+				code.Make(code.OpGetGlobal, 1),
+				code.Make(code.OpPop),
+			},
+		},
 
 
 	}
