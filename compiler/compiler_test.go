@@ -269,7 +269,7 @@ func TestConditionals(t *testing.T){
 			input:`
 			if (true) { 10 }; 3333;
 			`,
-			expectedConstants: []interface{}{10, 33333},
+			expectedConstants: []interface{}{10, 3333},
 			expectedInstrcutions: []code.Instructions{
 				code.Make(code.OpTrue),
 				code.Make(code.OpJumpNotTruthy, 7),
