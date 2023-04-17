@@ -71,7 +71,23 @@ func (vm *VM) Run() error{
 			if !isTruthy(condition){
 				ip = pos - 1;
 			}
+    
+		case code.OpSetGlobal:
+			globalIndex:= code.ReadUint16(vm.instructions[ip+1:])
+			ip+=2;
+			vm.globals[globalIndex]= vm.pop();
 
+		
+		case code.OpGetGlobal:
+			globalIndex := code.ReadUint16(vm.instructions[ip+1:])
+			ip+=2;
+
+			err:= vm.push(vm.globals[globalIndex])
+			if err!= nil{
+				return err 
+			}
+
+		
 		case code.OpPop:
 			vm.pop();
 		case code.OpTrue:
